@@ -13,42 +13,54 @@
     <% content_for :content do %>
 
       <header>
-        <nav>
+        <div class = "container">
+          <div class = "row">
+            <nav>
 
-          <% if admin_signed_in? %>
+              <% if admin_signed_in? %>
+                  <div class = "col-xs-4">
+                    <%= link_to admin_top_path do %>
+                        <%= image_tag "logo.png", size: "200x70", class: "logo_img" %>
+                    <% end %>
+                  </div>
 
-              <%= link_to admin_top_path do %>
-                  <%= image_tag "logo.png" %>
+                  <div class = "col-xs-8">
+                    <ul class = "nav nav-pills nav-justified" style= "margin-top: 15px;">
+                      <li><%= link_to "商品一覧", "#" %></li>
+                      <li><%= link_to "会員一覧", "#" %></li>
+                      <li><%= link_to "注文履歴一覧", "#" %></li>
+                      <li><%= link_to "ジャンル一覧", "#" %></li>
+                      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+                    </ul>
+                  </div>
+
+              <% else %>
+                  <div class = "col-xs-4">
+                    <%= link_to root_path do %>
+                        <%= image_tag "logo.png", size: "200x70", class: "logo_img" %>
+                    <% end %>
+                  </div>
+                  <div class = "col-xs-8">
+                    <ul class = "nav nav-pills nav-justified" style= "margin-top: 15px;">
+                      <li><%= link_to "About", about_path %></li>
+                      <li><%= link_to "商品一覧", "#" %></li>
+                      <li><%= link_to "新規登録", new_end_user_registration_path %></li>
+                      <li><%= link_to "ログイン", new_end_user_session_path %></li>
+                    </ul>
+                  </div>
+
               <% end %>
-              <ul>
-                <li><%= link_to "商品一覧", "#" %></li>
-                <li><%= link_to "会員一覧", "#" %></li>
-                <li><%= link_to "注文履歴一覧", "#" %></li>
-                <li><%= link_to "ジャンル一覧", "#" %></li>
-                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-              </ul>
 
-          <% else %>
+              <textform></textform>
 
-              <%= link_to root_path do %>
-                  <%= image_tag "logo.png" %>
-              <% end %>
-              <ul>
-                <li><%= link_to "About", about_path %></li>
-                <li><%= link_to "商品一覧", "#" %></li>
-                <li><%= link_to "新規登録", new_end_user_registration_path %></li>
-                <li><%= link_to "ログイン", new_end_user_session_path %></li>
-              </ul>
-
-          <% end %>
-
-          <textform></textform>
-
-        </nav>
+            </nav>
+          </div>
+        </div>
       </header>
 
 
       <body>
+        <div class = "container">
           <% if flash[:notice] %>
             <div class = "notice">
               <%= flash[:notice] %>
@@ -56,6 +68,7 @@
           <% end %>
 
           <%= yield %>
+        </div>
       </body>
 
       <footer></footer>
