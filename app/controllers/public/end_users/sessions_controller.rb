@@ -2,6 +2,7 @@
 
 class Public::EndUsers::SessionsController < Devise::SessionsController
   layout "public"
+  before_action :reject_user, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -19,10 +20,20 @@ class Public::EndUsers::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def reject_user
+    @my_data = EndUser.find_by(email: params[:end_user][:email].downcase)
+
+    if @my_data.active_for_authentication? == false
+      flash[:notice] = "already unsubsucribe"
+      redirect_to new_end_user_session_path
+    end
+
+  end
 end

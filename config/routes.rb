@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get "end_users/my_page/edit" => "end_users#edit", as: "edit_my_page"
       patch "end_users/my_page" => "end_users#update", as: "update_my_page"
       get "end_users/unsubscribe" => "end_users#unsubscribe", as: "unsubscribe"
+      patch "end_users/withdrawal" => "end_users#withdrawal_process", as: "withdrawal"
 
       resources :items, only: [:show, :index]
   end

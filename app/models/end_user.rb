@@ -13,4 +13,9 @@ class EndUser < ApplicationRecord
   validates :telephone_number, presence: true
 
 
+  def active_for_authentication?
+    super && (self.is_unsubscribe == false)
+  end
+
+
 end
