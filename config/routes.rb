@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   		root "homes#top"
       get "about" => "homes#about", as: "about"
 
-      resources :end_users, only: [:edit]
       get "end_users/my_page" => "end_users#show", as: "my_page"
+      get "end_users/my_page/edit" => "end_users#edit", as: "edit_my_page"
+      patch "end_users/my_page" => "end_users#update", as: "update_my_page"
+      get "end_users/unsubscribe" => "end_users#unsubscribe", as: "unsubscribe"
 
       resources :items, only: [:show, :index]
   end
