@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
-	before_action :authenticate_end_user!, except: [:top, :about]
+	before_action :authenticate_end_user!, except: [:top, :about], unless: :admin_signed_in?
+	before_action :authenticate_admin!, except: [:top, :about], unless: :end_user_signed_in?
 
 	def after_sign_in_path_for(resource)
 		if resource_name == :end_user
@@ -8,7 +9,6 @@ class ApplicationController < ActionController::Base
 
 		elsif resource_name == :admin
 			admin_top_path
-
 		end
 	end
 

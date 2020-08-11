@@ -1,45 +1,87 @@
-<h1>マイページ</h1>
+<div class = "row">
+	<div class = "col-xs-offset-2">
+		<h3 style = "margin: 30px 0;">マイページ</h3>
+	</div>
+</div>
 
-<lavel>登録情報</lavel>
 
-<%= link_to "編集する", edit_my_page_path, class: "btn btn-primary" %>
-<%= link_to "パスワードを変更する", "#", class: "btn btn-primary" %>
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+
+	<div class = "col-xs-1">
+		<label style ="line-height: 34px;">登録情報</label>
+	</div>
+	<div class = "col-xs-2">
+		<%= link_to "編集する", edit_my_page_path, class: "btn btn-primary" %>
+	</div>
+	<div class = "col-xs-2">
+		<%= link_to "パスワードを変更する", "#", class: "btn btn-primary" %>
+	</div>
+	<div class = "col-xs-6">
+	</div>
+</div>
+<br>
+
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+	<div class = "col-xs-6">
+		<table class = "table table-bordered">
+			<tbody>
+				<tr>
+					<td class = "active col-xs-4">氏名</td>
+					<td class = "col-xs-8"><%= @my_data.last_name %> <%= @my_data.first_name %></td>
+				</tr>
+				<tr>
+					<td class = "active">カナ</td>
+					<td><%= @my_data.kana_last_name %> <%= @my_data.kana_first_name %></td>
+				</tr>
+				<tr>
+					<td class = "active">郵便番号</td>
+					<td><%= @my_data.postal_code %></td>
+				</tr>
+				<tr>
+					<td class = "active">住所</td>
+					<td><%= @my_data.address %></td>
+				</tr>
+				<tr>
+					<td class = "active">電話番号</td>
+					<td><%= @my_data.telephone_number %></td>
+				</tr>
+				<tr>
+					<td class = "active">メールアドレス</td>
+					<td><%= @my_data.email %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class = "col-xs-5">
+	</div>
+</div>
 
 
-<table class = "table table-bordered">
-	<tbody>
-		<tr>
-			<th>氏名</th>
-			<td><%= @my_data.last_name %> <%= @my_data.first_name %></td>
-		</tr>
-		<tr>
-			<th>カナ</th>
-			<td><%= @my_data.kana_last_name %> <%= @my_data.kana_first_name %></td>
-		</tr>
-		<tr>
-			<th>郵便番号</th>
-			<td><%= @my_data.postal_code %></td>
-		</tr>
-		<tr>
-			<th>住所</th>
-			<td><%= @my_data.address %></td>
-		</tr>
-		<tr>
-			<th>電話番号</th>
-			<td><%= @my_data.telephone_number %></td>
-		</tr>
-		<tr>
-			<th>メールアドレス</th>
-			<td><%= @my_data.email %></td>
-		</tr>
-	</tbody>
-</table>
-
-<label>配送先</label>
-
-<%= link_to "一覧を見る", "#", class: "btn btn-primary" %>
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+	<div class = "col-xs-1">
+		<label style ="line-height: 34px;">配送先</label>
+	</div>
+	<div class = "col-xs-10">
+		<%= link_to "一覧を見る", "#", class: "btn btn-primary" %>
+	</div>
+</div>
 
 <br>
-<label>注文履歴</label>
-<%= link_to "一覧を見る", "#", class: "btn btn-primary" %>
+
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+	<div class = "col-xs-1">
+		<label style ="line-height: 34px;">注文履歴</label>
+	</div>
+	<div class = "col-xs-10">
+		<%= link_to "一覧を見る", "#", class: "btn btn-primary" %>
+	</div>
+</div>
 
