@@ -12,6 +12,8 @@ class EndUser < ApplicationRecord
   validates :address, presence: true
   validates :telephone_number, presence: true
 
+  has_many :cart_items
+
 
   def active_for_authentication?
     super && (self.is_unsubscribe == false)

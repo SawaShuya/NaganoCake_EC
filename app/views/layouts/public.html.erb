@@ -28,7 +28,7 @@
                   <% if end_user_signed_in? %>
                       <li role="presentation"><%= link_to "マイページ", my_page_path %></li>
                       <li role="presentation"><%= link_to "商品一覧", items_path %></li>
-                      <li role="presentation"><%= link_to "カート", "#" %></li>
+                      <li role="presentation"><%= link_to "カート", cart_items_path %></li>
                       <li role="presentation"><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %></li>
 
                   <% else %>

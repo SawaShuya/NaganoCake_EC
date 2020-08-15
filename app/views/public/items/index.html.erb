@@ -34,7 +34,7 @@
 				<% @items.each do |item| %>
 					<div class = "items">
 						<%= attachment_image_tag item, :item_image, size: "190x150", fallback: "no_image.jpg" %><br>
-						<label><%= link_to item.name, "#" %></label><br>
+						<label><%= link_to item.name, item_path(item) %></label><br>
 						<label>￥<%= item.non_taxed_price %></label>
 					</div>
 				<% end %>

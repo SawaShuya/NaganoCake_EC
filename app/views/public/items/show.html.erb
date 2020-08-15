@@ -1,2 +1,49 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+	<div class = "col-xs-2">
+		<div class = "genre box" style = "margin: 0px auto; width: 90%; margin-top: 50px;">
+			<div class = "genre title" style = "width: 100%; text-align: center;">
+				<h4>ジャンル検索</h4>
+			</div>
+
+			<div class = "select genres" style = "font-size: 17px;">
+				<% @genres.each do |genre| %>
+					<%= genre.name %>
+					<br><br>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class = "col-xs-1">
+	</div>
+
+	<div class = "col-xs-4">
+		<br><br>
+		<%= attachment_image_tag @item, :item_image, size: "300x250", fallback: "no_image.jpg" %>
+	</div>
+
+	<div class = "col-xs-4">
+		<br><br>
+		<div class = "row">
+			<h3><%= @item.name %></h3>
+		</div>
+		<div class = "row">
+			<p><%= @item.explanation %></p>
+		</div>
+		<div class = "row">
+			<% @item_taxed_price = @item.non_taxed_price * 1.1 %>
+			<% @item_taxed_price = @item_taxed_price.ceil %>
+			<p><strong style = "font-size: 25px;">￥<%= @item_taxed_price %></strong>　(税込)</p>
+		</div>
+		<div class = "row">
+			<%= form_for(@cart_item, url: cart_items_path) do |f| %>
+				<%= f.hidden_field :end_user_id, value: current_end_user.id %>
+				<%= f.hidden_field :item_id, value: @item.id %>
+				<%= f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5]], include_blank: "個数選択" %>　
+				<%= f.submit "カートに入れる", class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>
