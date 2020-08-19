@@ -13,6 +13,7 @@ class EndUser < ApplicationRecord
   validates :telephone_number, presence: true
 
   has_many :cart_items
+  has_many :addresses
 
 
   def active_for_authentication?
