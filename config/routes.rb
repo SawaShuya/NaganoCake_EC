@@ -25,11 +25,15 @@ Rails.application.routes.draw do
       patch "end_users/withdrawal" => "end_users#withdrawal_process", as: "withdrawal"
 
       resources :items, only: [:show, :index]
+
       delete "cart_items/destroy_all" => "cart_items#destroy_all", as: "destroy_all"
       resources :cart_items, only: [:index, :update, :destroy, :create]
+
       post "orders/confirm" => "orders#confirm", as: "order_confirm"
       get "orders/finish" => "orders#finish", as: "order_finish"
       resources :orders, only: [:new, :create]
+
+       resources :addresses, only: [:index, :create]
   end
 
 

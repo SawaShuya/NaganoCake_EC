@@ -11,4 +11,5 @@ class Order < ApplicationRecord
 		prepare_shipping: 3,
 		shipped: 4,
 	}
+	has_many :order_details
 end

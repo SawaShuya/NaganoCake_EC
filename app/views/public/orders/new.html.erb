@@ -28,12 +28,13 @@
 	<div class = "row">
 		<div class = "col-xs-1">
 		</div>
+		<!-- ラジオボタンの選択によってaddress_optionを設定する -->
 		<div class = "col-xs-11">
-			<label><%= f.radio_button :address_option, 0 %> ご自身の住所</label><br>
+			<label><%= f.radio_button :address_option, 0, checked: true %> ご自身の住所</label><br>
 				<%= current_end_user.postal_code + current_end_user.address %><br>
 				<%= current_end_user.last_name %><%= current_end_user.first_name %><br>
 			<label><%= f.radio_button :address_option, 1 %> 登録済み住所から選択</label><br>
-				<%# f.collection_select :address, @addresses, :id, :name, :prompt => "--選択してください--" %>
+				<%= f.collection_select :id, @addresses, :id, :consignee, :prompt => "--選択してください--" %><br>
 			<label><%= f.radio_button :address_option, 2 %> 新規住所</label><br>
 			<label>郵便番号</label><%= f.text_field :postal_code %><br>
 			<label>住所</label><%= f.text_field :destination_address %><br>
