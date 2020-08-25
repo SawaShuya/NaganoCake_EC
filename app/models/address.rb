@@ -4,4 +4,8 @@ class Address < ApplicationRecord
 	validates :postal_code, presence: true
 	validates :destination, presence: true
 	validates :consignee, presence: true
+
+	def view_address
+		self.postal_code + "　" + self.destination + "　" + self.consignee
+	end
 end

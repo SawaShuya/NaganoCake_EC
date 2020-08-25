@@ -6,7 +6,7 @@ ja:
         credit: "クレジット"
 
       status:
-        aiting_for_payment: "入金待ち"
+        waiting_for_payment: "入金待ち"
         confilm_payment: "入金確認"
         making: "制作中"
         prepare_shipping: "発送準備中"
