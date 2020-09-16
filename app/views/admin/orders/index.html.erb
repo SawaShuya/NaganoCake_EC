@@ -1,28 +1,40 @@
-<h3>注文履歴一覧</h3>
+<div class = "row">
+	<div class = "col-xs-offset-2">
+		<h3>注文履歴一覧</h3>
+	</div>
+</div>
+<br><br>
 
-<table class = "table">
-	<tr>
-		<th>購入日時</th>
-		<th>購入者</th>
-		<th>注文個数</th>
-		<th>注文ステータス</th>
-	</tr>
-	<% @order.each do |order| %>
-		<tr>
-			<td>
-				<%= link_to admin_order_path(order) do %>
-					<%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
-				<% end %>
-			</td>
-			<td><%= order.end_user.last_name + "　" + order.end_user.first_name %></td>
-			<td>
-				<% sum_amount = 0 %>
-				<% order.order_details.each do |detail| %>
-					<% sum_amount += detail.amount %>
-				<% end %>
-				<%= sum_amount %>
-			</td>
-			<td><%= order.status_i18n %></td>
-		</tr>
-	<% end %>
-</table>
+<div class = "row">
+	<div class = "col-xs-1">
+	</div>
+	<div class = "col-xs-9">
+		<table class = "table" style = "border-bottom: solid; border-width: 1px; border-color: #ddd;">
+			<tr class = "active">
+				<th>購入日時</th>
+				<th>購入者</th>
+				<th>注文個数</th>
+				<th>注文ステータス</th>
+			</tr>
+			<% @order.each do |order| %>
+				<tr>
+					<td>
+						<%= link_to admin_order_path(order) do %>
+							<%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+						<% end %>
+					</td>
+					<td><%= order.end_user.last_name + "　" + order.end_user.first_name %></td>
+					<td>
+						<% sum_amount = 0 %>
+						<% order.order_details.each do |detail| %>
+							<% sum_amount += detail.amount %>
+						<% end %>
+						<%= sum_amount %>
+					</td>
+					<td><%= order.status_i18n %></td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class = "col-xs-2">
+	</div>

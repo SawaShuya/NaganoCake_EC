@@ -2,13 +2,13 @@ ja:
   enums:
     order:
       payment_method:
-        cash: "現金"
+        cash: "銀行振込"
         credit: "クレジット"
 
       status:
         waiting_for_payment: "入金待ち"
         confilm_payment: "入金確認"
-        making: "制作中"
+        making: "製作中"
         prepare_shipping: "発送準備中"
         shipped: "発送済み"
 

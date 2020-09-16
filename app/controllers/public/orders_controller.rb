@@ -9,8 +9,8 @@ class Public::OrdersController < Public::Base
 		@order = Order.new(order_params)
 		# 送料は固定で800
 		@order.postage = 800
-		# total_paymentはhtmlのほうで計算
-		@order.total_payment = @total_payment
+		@total_payment = 0
+
 		# addres_optionによって宛名、郵便番号、住所を指定
 		if params[:order][:address_option] == "0"
 			@order.consignee = current_end_user.last_name + current_end_user.first_name
@@ -33,6 +33,7 @@ class Public::OrdersController < Public::Base
 	end
 
 	def create
+		
 		@order = Order.new(order_params)
 		@order.end_user_id = current_end_user.id
 

@@ -95,7 +95,7 @@
 	<div class = "col-xs-offset-5">
 		<%= form_for(@order, url: orders_path) do |f| %>
 			<%= f.hidden_field :postage %>
-			<%= f.hidden_field :total_payment %>
+			<%= f.hidden_field :total_payment, :value => @total_payment %>
 			<%= f.hidden_field :consignee %>
 			<%= f.hidden_field :postal_code %>
 			<%= f.hidden_field :destination_address %>
