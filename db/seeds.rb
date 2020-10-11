@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Admin.create!(
+Admin.create(
 	email: "a@a",
 	password: "aaaaaa"
 
 )
 
 
-Genre.create!(
+Genre.create(
 	[
 		{
 		id: 1,
@@ -35,14 +35,14 @@ Genre.create!(
 
 )
 
-Item.create!(
+Item.create(
 	[
 		{
 		genre_id: 1,
 		name: "チーズケーキ",
 		explanation: "自家製ミルクを使用した濃厚な味わい",
 		non_taxed_price: 2000,
-		item_image: File.open("/home/vagrant/work/NaganoCake/app/assets/images/cheese_cake.jpg"),
+		item_image: File.open("./app/assets/images/cheese_cake.jpg"),
 		is_active: true
 		},
 		{
@@ -50,7 +50,7 @@ Item.create!(
 		name: "クッキー",
 		explanation: "口触りよし。お土産にもおすすめ",
 		non_taxed_price: 1500,
-		item_image: File.open("/home/vagrant/work/NaganoCake/app/assets/images/cookie.jpg"),
+		item_image: File.open("./app/assets/images/cookie.jpg"),
 		is_active: true
 		},
 		{
@@ -58,7 +58,7 @@ Item.create!(
 		name: "キャンディー",
 		explanation: "甘さと酸味のバランスが心地よい",
 		non_taxed_price: 1000,
-		item_image: File.open("/home/vagrant/work/NaganoCake/app/assets/images/candy.jpg"),
+		item_image: File.open("./app/assets/images/candy.jpg"),
 		is_active: true
 		}
 	]

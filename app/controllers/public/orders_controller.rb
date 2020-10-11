@@ -2,6 +2,10 @@ class Public::OrdersController < Public::Base
 	def new
 		@order = Order.new
 		@addresses = Address.all
+		@cart_items = CartItem.where(end_user_id: current_end_user.id)
+		if @cart_items.blank?
+			redirect_to request.referer
+		end
 	end
 
 	def confirm
@@ -33,7 +37,6 @@ class Public::OrdersController < Public::Base
 	end
 
 	def create
-		
 		@order = Order.new(order_params)
 		@order.end_user_id = current_end_user.id
 

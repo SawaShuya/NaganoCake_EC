@@ -34,7 +34,7 @@
 		</div>
 		<div class = "row">
 			<% @item_taxed_price = @item.non_taxed_price * 1.1 %>
-			<% @item_taxed_price = @item_taxed_price.ceil %>
+			<% @item_taxed_price = @item_taxed_price.floor(1).ceil %>
 			<p><strong style = "font-size: 25px;">￥<%= @item_taxed_price %></strong>　(税込)</p>
 		</div>
 		<div class = "row">

@@ -80,11 +80,11 @@
 						<td><%= detail.item.name %></td>
 						<td>
 							<% taxed_price = detail.non_taxed_price * 1.1 %>
-							<%= taxed_price.ceil %>
+							<%= taxed_price.floor(1).ceil %>
 						</td>
 						<td><%= detail.amount %></td>
 						<td>
-							<% subtotal = detail.amount * taxed_price.ceil %>
+							<% subtotal = detail.amount * taxed_price.floor(1).ceil %>
 							<%= subtotal %>
 						</td>
 						<td>
@@ -138,3 +138,4 @@
 			</div><br>
 		</div>
 	</div>
+</div>

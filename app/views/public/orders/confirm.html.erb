@@ -25,7 +25,7 @@
 						</td>
 						<td class = "col-xs-2">
 							<% cart_item_taxed_price = cart_item.item.non_taxed_price * 1.1 %>
-							<% cart_item_taxed_price = cart_item_taxed_price.ceil %>
+							<% cart_item_taxed_price = cart_item_taxed_price.floor(1).ceil %>
 							<%= cart_item_taxed_price %>
 						</td>
 						<td class = "col-xs-2">
