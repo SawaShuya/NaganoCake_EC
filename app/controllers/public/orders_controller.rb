@@ -4,7 +4,7 @@ class Public::OrdersController < Public::Base
 		@addresses = Address.all
 		@cart_items = CartItem.where(end_user_id: current_end_user.id)
 		if @cart_items.blank?
-			redirect_to request.referer
+			redirect_to cart_items_path
 		end
 	end
 
