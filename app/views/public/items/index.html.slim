@@ -1,0 +1,40 @@
+.row
+  .col-xs-1
+
+  .col-xs-2
+    .genre.box[style="margin: 0px auto; width: 90%; margin-top: 50px;"]
+      .genre.title[style="width: 100%; text-align: center;"]
+        h4
+          | ジャンル検索
+      .select.genres[style="font-size: 17px;"]
+        - @genres.each do |genre|
+          = genre.name
+          br
+          br
+  .col-xs-1
+
+  .col-xs-8
+    .row
+      .col-xs-2
+        h3
+          | 商品一覧
+      .col-xs-2
+        h4[style="line-height: 56px;"]
+          | 全
+          = @items.count
+          | 件
+      .col-xs-8
+
+    .row
+      .clearfix
+        - @items.each do |item|
+          .items
+            = attachment_image_tag item, :item_image, size: "190x150", fallback: "no_image.jpg"
+            br
+            label
+              = link_to item.name, item_path(item)
+            br
+            label
+              | ￥
+              = item.non_taxed_price
+    br

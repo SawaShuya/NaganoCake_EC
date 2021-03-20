@@ -1,0 +1,67 @@
+.row
+  .col-xs-offset-2
+    h3
+      | 商品新規登録
+br
+= render "admin/admins/shared/error_messages", resource: @item
+= form_for(@item, url: admin_items_path) do |f|
+  .row
+    .col-xs-4
+      = f.attachment_field :item_image
+    .col-xs-8
+      .row
+        .col-xs-2
+          label
+            | 商品名
+        .col-xs-6
+          = f.text_field :name
+        .col-xs-4
+
+      br
+      .row
+        .col-xs-2
+          label
+            | 商品説明
+        .col-xs-6
+          = f.text_area :explanation, style: "width: 70%; height: 150px;"
+        .col-xs-4
+
+      br
+      .row
+        .col-xs-2
+          label
+            | ジャンル
+        .col-xs-6
+          = f.collection_select :genre_id, @genres, :id, :name, :prompt => "--選択してください--"
+        .col-xs-4
+
+      br
+      .row
+        .col-xs-2
+          label
+            | 税抜価格
+        .col-xs-6
+          = f.text_field :non_taxed_price
+          span
+            | 円
+        .col-xs-4
+
+      br
+      .row
+        .col-xs-2
+          label
+            | 販売ステータス
+        .col-xs-6
+          lavel
+            = f.radio_button :is_active, :true
+            | 販売中
+          | 　 
+          lavel
+            = f.radio_button :is_active, :false
+            | 品切れ
+        .col-xs-4
+
+      br
+      .row
+        .col-xs-offset-7
+          = f.submit "新規登録", class: "btn btn-primary"

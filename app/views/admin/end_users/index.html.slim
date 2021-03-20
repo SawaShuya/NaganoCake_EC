@@ -1,0 +1,38 @@
+.row
+  .col-xs-offset-1
+    h3
+      | 会員一覧
+.row
+  .col-xs-2
+
+  .col-xs-8
+    table.table[style="border-bottom: solid; border-width: 1px; border-color: #ddd;"]
+      thead
+        tr.active
+          th
+            | 会員ID
+          th
+            | 氏名
+          th
+            | メールアドレス
+          th
+            | ステータス
+      tbody
+        - @end_users.each do |end_user|
+          tr
+            td
+              = end_user.id
+            td
+              = link_to "#" do
+                = end_user.last_name
+                = end_user.first_name
+            td
+              = end_user.email
+            td
+              - if end_user.is_unsubscribe == true
+                p
+                  | 退会済
+              - else
+                p
+                  | 有効
+  .col-xs-2

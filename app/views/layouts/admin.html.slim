@@ -1,0 +1,62 @@
+doctype html
+html
+  head
+    title
+      | NaganoCake
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    - # content_for :content do
+      header
+        .container
+          .row
+            nav
+              - if admin_signed_in?
+                .col-xs-4
+                  = link_to admin_top_path do
+                    = image_tag "logo.png", size: "200x70", class: "logo_img"
+                .col-xs-8
+                  .row
+                    ul.nav.nav-pills.nav-justified[style="margin-top: 15px;"]
+                      li
+                        = link_to "商品一覧", admin_items_path
+                      li
+                        = link_to "会員一覧", admin_end_users_path
+                      li
+                        = link_to "注文履歴一覧", admin_orders_path
+                      li
+                        = link_to "ジャンル一覧", admin_genres_path
+                      li
+                        = link_to "ログアウト", destroy_admin_session_path, method: :delete
+                  .row
+                    .col-xs-offset-8
+                      = form_tag(admin_items_path, :method => "get") do
+                        = text_field_tag :search, "", class: "serch-form", placeholder: "Search"
+                        = button_tag :type => "submit", class: "btn", :name => nil do
+                          span.glyphicon.glyphicon-search[aria-hidden="true"]
+              - else
+                .col-xs-4
+                  = link_to root_path do
+                    = image_tag "logo.png", size: "200x70", class: "logo_img"
+                .col-xs-8
+                  ul.nav.nav-pills.nav-justified[style="margin-top: 15px;"]
+                    li
+                      = link_to "About", about_path
+                    li
+                      = link_to "商品一覧", "#"
+                    li
+                      = link_to "新規登録", new_end_user_registration_path
+                    li
+                      = link_to "ログイン", new_end_user_session_path
+              textform
+      body
+        .container
+          - if flash[:notice]
+            .notice
+              = flash[:notice]
+          = yield
+      footer
+      - # end
+      - #= render template: "layouts/application"

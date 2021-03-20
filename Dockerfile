@@ -17,3 +17,4 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /myproject
+ENV RUBYOPT -EUTF-8

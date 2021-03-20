@@ -1,0 +1,74 @@
+.row
+  .col-xs-offset-2
+    h3[style="margin: 30px 0;"]
+      | マイページ
+.row
+  .col-xs-1
+
+  .col-xs-1
+    label[style="line-height: 34px;"]
+      | 登録情報
+  .col-xs-2
+    = link_to "編集する", edit_my_page_path, class: "btn btn-primary"
+  .col-xs-2
+    = link_to "パスワードを変更する", "#", class: "btn btn-primary"
+  .col-xs-6
+
+br
+.row
+  .col-xs-1
+
+  .col-xs-6
+    table.table.table-bordered
+      tbody
+        tr
+          td.active.col-xs-4
+            | 氏名
+          td.col-xs-8
+            = @my_data.last_name
+            = @my_data.first_name
+        tr
+          td.active
+            | カナ
+          td
+            = @my_data.kana_last_name
+            = @my_data.kana_first_name
+        tr
+          td.active
+            | 郵便番号
+          td
+            = @my_data.postal_code
+        tr
+          td.active
+            | 住所
+          td
+            = @my_data.address
+        tr
+          td.active
+            | 電話番号
+          td
+            = @my_data.telephone_number
+        tr
+          td.active
+            | メールアドレス
+          td
+            = @my_data.email
+  .col-xs-5
+
+.row
+  .col-xs-1
+
+  .col-xs-1
+    label[style="line-height: 34px;"]
+      | 配送先
+  .col-xs-10
+    = link_to "一覧を見る", addresses_path, class: "btn btn-primary"
+br
+.row
+  .col-xs-1
+
+  .col-xs-1
+    label[style="line-height: 34px;"]
+      | 注文履歴
+  .col-xs-10
+    = link_to "一覧を見る", "#", class: "btn btn-primary"

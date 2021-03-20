@@ -1,0 +1,43 @@
+.row
+  .col-xs-1
+
+  .col-xs-2
+    .genre.box[style="margin: 0px auto; width: 90%; margin-top: 50px;"]
+      .genre.title[style="width: 100%; text-align: center;"]
+        h4
+          | ジャンル検索
+      .select.genres[style="font-size: 17px;"]
+        - @genres.each do |genre|
+          = genre.name
+          br
+          br
+  .col-xs-1
+
+  .col-xs-4
+    br
+    br
+    = attachment_image_tag @item, :item_image, size: "300x250", fallback: "no_image.jpg"
+  .col-xs-4
+    br
+    br
+    .row
+      h3
+        = @item.name
+    .row
+      p
+        = @item.explanation
+    .row
+      - @item_taxed_price = @item.non_taxed_price * 1.1
+      - @item_taxed_price = @item_taxed_price.floor(1).ceil
+      p
+        strong[style="font-size: 25px;"]
+          | ￥
+          = @item_taxed_price
+        | 　(税込)
+    .row
+      = form_for(@cart_item, url: cart_items_path) do |f|
+        = f.hidden_field :end_user_id, value: current_end_user.id
+        = f.hidden_field :item_id, value: @item.id
+        = f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5]], include_blank: "個数選択"
+        | 　 
+        = f.submit "カートに入れる", class: "btn btn-primary"

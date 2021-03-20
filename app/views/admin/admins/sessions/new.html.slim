@@ -1,0 +1,31 @@
+.row
+  .col-xs-offset-1
+    h3
+      | 管理者ログイン
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field
+    .row
+      .col-xs-2
+
+      .col-xs-2
+        lavel
+          | メールアドレス
+      .col-xs-3
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      .col-xs-7
+
+  .field
+    .row
+      .col-xs-2
+
+      .col-xs-2
+        lavel
+          | パスワード
+      .col-xs-3
+        = f.password_field :password, autocomplete: "current-password"
+      .col-xs-7
+
+  .actions
+    .row
+      .col-xs-offset-4
+        = f.submit "ログイン"

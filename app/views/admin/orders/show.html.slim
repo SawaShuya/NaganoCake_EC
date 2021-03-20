@@ -1,0 +1,124 @@
+.row
+  .col-xs-offset-2
+    h3
+      | 注文履歴詳細
+br
+br
+= form_for(@order, url: admin_order_path(@order)) do |f|
+  .row
+    .col-xs-1
+
+    .col-xs-2
+      b
+        | 購入者
+    .col-xs-9
+      = link_to "#" do
+        = @order.end_user.last_name + "　" + @order.end_user.first_name
+  br
+  .row
+    .col-xs-1
+
+    .col-xs-2
+      b
+        | 配送先
+    .col-xs-9
+      = "〒" + @order.postal_code + " " + @order.destination_address
+      br
+      = @order.consignee
+  br
+  .row
+    .col-xs-1
+
+    .col-xs-2
+      b
+        | 支払方法
+    .col-xs-9
+      = @order.payment_method_i18n
+  br
+  .row
+    .col-xs-1
+
+    .col-xs-2
+      b
+        | 注文ステータス
+    .col-xs-2
+      = f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]}
+    .col-xs-2
+      = f.submit "更新", class: "btn btn-primary"
+  br
+br
+br
+.row
+  .col-xs-1
+
+  .col-xs-7
+    table.table[style="border-bottom: solid; border-width: 1px; border-color: #ddd;"]
+      tr.active
+        th
+          | 商品名
+        th
+          | 単価(税込)
+        th
+          | 個数
+        th
+          | 小計
+        th
+          | 製作ステータス
+        th
+      - @sum = 0
+      - @order_details.each do |detail|
+        tr
+          = form_for(detail, url: admin_order_detail_path(detail.id)) do |f|
+            td
+              = detail.item.name
+            td
+              - taxed_price = detail.non_taxed_price * 1.1
+              = taxed_price.floor(1).ceil
+            td
+              = detail.amount
+            td
+              - subtotal = detail.amount * taxed_price.floor(1).ceil
+              = subtotal
+            td
+              = f.select :production_status, OrderDetail.production_statuses.keys.map {|k| [I18n.t("enums.order_detail.production_status.#{k}"), k]}
+            td
+              = f.submit "更新", class: "btn btn-primary"
+            - @sum += subtotal
+  .col-xs-4
+    .row[style="margin-top: 70px;"]
+      .col-xs-1
+
+      .col-xs-4
+        b
+          | 商品合計
+      .col-xs-3.text-right
+        = @sum
+        | 円 
+      .col-xs-4
+
+    br
+    .row
+      .col-xs-1
+
+      .col-xs-4
+        b
+          | 送料
+      .col-xs-3.text-right
+        = @order.postage
+        | 円 
+      .col-xs-4
+
+    br
+    .row
+      .col-xs-1
+
+      .col-xs-4
+        b
+          | 請求金額合計
+      .col-xs-3.text-right
+        b
+          = @order.total_payment
+          | 円
+      .col-xs-4
+
+      br

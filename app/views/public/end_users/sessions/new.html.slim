@@ -1,0 +1,41 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .row
+    .col-xs-offset-1
+      h3
+        | 会員の方はこちらからログイン
+  .field
+    .row
+      .col-xs-2
+
+      .col-xs-2
+        label
+          | メールアドレス
+      .col-xs-5
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      .col-xs-3
+
+  .field
+    .row
+      .col-xs-2
+
+      .col-xs-2
+        label
+          | パスワード
+      .col-xs-5
+        = f.password_field :password, autocomplete: "current-password"
+  .row
+    .col-xs-offset-6
+      = link_to "=> パスワードを忘れた方はこちら", new_end_user_password_path
+  .actions
+    .row
+      .col-xs-offset-4
+        = f.submit "ログイン"
+.link
+  .row
+    .col-xs-offset-1
+      h3
+        | 登録がお済でない方
+    .col-xs-offset-2
+      p
+        = link_to "こちら", new_end_user_registration_path
+        | からログインしてください
