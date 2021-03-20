@@ -28,7 +28,7 @@ class Public::EndUsers::SessionsController < Devise::SessionsController
   # end
 
   def reject_user
-    @my_data = EndUser.find_by(email: params[:end_user][:email].downcase)
+    @my_data = EndUser.find_by(email: params[:end_user][:email])
 
     if @my_data.active_for_authentication? == false
       flash[:notice] = "already unsubsucribe"
