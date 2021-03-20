@@ -22,7 +22,7 @@ class Item < ApplicationRecord
 	end
 
 	def taxed
-		(self.non_taxed_price * 1.1).ceil
+		(self.non_taxed_price * 1.1).floor(1).ceil
 	end
 
 end
