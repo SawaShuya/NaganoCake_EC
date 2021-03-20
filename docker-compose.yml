@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres_infratop:
+    image: postgres
+    ports:
+      - "4321:4321"
+    environment:
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'password'
+  web:
+    build: .
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/myproject
+      - bundle:/usr/local/bundle #bundle installした後buildし直さなくてよくなる
+    depends_on:
+      - postgres_infratop
+    stdin_open: true
+    tty: true
+volumes:
+  bundle: #bundle installした後buildし直さなくてよくなる
