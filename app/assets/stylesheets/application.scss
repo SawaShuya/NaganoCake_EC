@@ -25,15 +25,3 @@
 .text {
 	margin-top: 100px;
 }
-
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-.items {
-	width: 25%;
-	margin-bottom: 10px;
-	float: left;
-}

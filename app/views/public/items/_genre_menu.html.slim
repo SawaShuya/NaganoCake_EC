@@ -1,0 +1,7 @@
+.genre-menu
+  h4.mb-3
+    | ジャンル検索
+  ul.select-menu
+    - genres.each do |genre|
+      li.genre-name.mb-3
+        = link_to genre.name, '#'

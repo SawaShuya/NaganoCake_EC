@@ -21,4 +21,8 @@ class Item < ApplicationRecord
 		end
 	end
 
+	def taxed
+		(self.non_taxed_price * 1.1).ceil
+	end
+
 end

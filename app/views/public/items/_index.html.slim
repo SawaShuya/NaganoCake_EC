@@ -1,0 +1,19 @@
+.title.mb-4
+  h3.d-inline-block.mr-5
+    | 商品一覧
+  h4.d-inline-block
+    | 全
+    = @items.count
+    | 件
+  .col-8
+
+.items
+  - items.each do |item|
+    .card.shadow.p-3.d-inline-block.mr-3
+      .item-image.mb-3
+        = attachment_image_tag item, :item_image, size: "190x150", fallback: "no_image.jpg"
+      .item-name.mb-3
+        = link_to item.name, item_path(item)
+      .item-price.mb-3
+        | ￥
+        = item.non_taxed_price
