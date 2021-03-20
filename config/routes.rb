@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       get "orders/finish" => "orders#finish", as: "order_finish"
       resources :orders, only: [:new, :create]
 
-       resources :addresses, only: [:index, :create]
+      resources :addresses, only: [:index, :create]
   end
 
 

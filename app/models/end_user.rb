@@ -12,8 +12,8 @@ class EndUser < ApplicationRecord
   validates :address, presence: true
   validates :telephone_number, presence: true
 
-  has_many :cart_items
-  has_many :addresses
+  has_many :cart_items, dependent: :destroy
+  has_many :addresses, dependent: :destroy
   has_many :orders
 
 
