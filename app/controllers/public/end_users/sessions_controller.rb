@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Public::EndUsers::SessionsController < Devise::SessionsController
-  layout "public"
   before_action :reject_user, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 

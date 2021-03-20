@@ -1,1 +1,21 @@
-= content_for?(:content) ? yield(:content) : yield
+doctype html
+html
+  head
+    title
+      | NaganoCake
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    header.navbar.navbar-dark.bg-dark
+      = render 'layouts/header'
+
+    main.p-4
+      .container
+        .notice
+          = flash[:notice]
+        = yield
+
+    footer.navbar.fixed-bottom.navbar-light.bg-light

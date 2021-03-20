@@ -1,4 +1,4 @@
-class Public::CartItemsController < Public::Base
+class Public::CartItemsController < ApplicationController
 	def index
 		@cart_items = CartItem.where(end_user_id: current_end_user.id)
 	end

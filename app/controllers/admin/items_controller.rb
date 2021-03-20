@@ -1,4 +1,4 @@
-class Admin::ItemsController < Admin::Base
+class Admin::ItemsController < ApplicationController
 
 	def index
 		@items = Item.search(params[:search])

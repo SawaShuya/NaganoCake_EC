@@ -1,0 +1,44 @@
+- if admin_signed_in?
+  .container
+    = link_to admin_top_path do
+      = image_tag "logo.png", size: "200x70", class: "navbar-brand"
+
+    nav
+      ul.nav.ml-auto
+        li
+          = link_to "商品一覧", admin_items_path, class: "nav-link text-light"
+        li
+          = link_to "会員一覧", admin_end_users_path, class: "nav-link text-light"
+        li
+          = link_to "注文履歴一覧", admin_orders_path, class: "nav-link text-light"
+        li
+          = link_to "ジャンル一覧", admin_genres_path, class: "nav-link text-light"
+        li
+          = link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light"
+
+
+- else
+  .container
+    = link_to root_path do
+      = image_tag "logo.png", size: "200x70", class: "navbar-brand"
+
+    nav
+      ul.nav.ml-auto
+        -if end_user_signed_in?
+          li.nav-item
+            = link_to "マイページ", my_page_path, class: "nav-link text-light text-light"
+          li.nav-item
+            = link_to "商品一覧", items_path, class: "nav-link text-light"
+          li.nav-item
+            = link_to "カート", cart_items_path, class: "nav-link text-light"
+          li.nav-item
+            = link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: "nav-link text-light"
+        - else
+          li.nav-item
+            = link_to "About", about_path, class: "nav-link text-light"
+          li.nav-item
+            = link_to "商品一覧", items_path, class: "nav-link text-light"
+          li.nav-item
+            = link_to "新規登録", new_end_user_registration_path, class: "nav-link text-light"
+          li.nav-item
+            = link_to "ログイン", new_end_user_session_path, class: "nav-link text-light"

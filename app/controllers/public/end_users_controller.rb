@@ -1,4 +1,4 @@
-class Public::EndUsersController < Public::Base
+class Public::EndUsersController < ApplicationController
   def show
   	@my_data = EndUser.find(current_end_user.id)
   end
