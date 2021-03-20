@@ -1,4 +1,4 @@
-.text[style="text-align: center;"]
+.text
   h3
     | 本当に退会しますか?
   p
@@ -8,9 +8,9 @@
   p
     | 退会する場合は、「退会する」をクリックしてください
 .row
-  .col-xs-4
+  .col-4
 
-  .col-xs-3
+  .col-3
     = link_to "退会しない", my_page_path, class: "btn btn-primary"
-  .col-xs-3
+  .col-3
     = link_to "退会する", withdrawal_path, method: :patch, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger"

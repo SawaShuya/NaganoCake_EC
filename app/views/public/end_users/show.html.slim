@@ -1,30 +1,30 @@
 .row
-  .col-xs-offset-2
-    h3[style="margin: 30px 0;"]
+  .col-offset-2
+    h3
       | マイページ
 .row
-  .col-xs-1
+  .col-1
 
-  .col-xs-1
-    label[style="line-height: 34px;"]
+  .col-1
+    label
       | 登録情報
-  .col-xs-2
+  .col-2
     = link_to "編集する", edit_my_page_path, class: "btn btn-primary"
-  .col-xs-2
+  .col-2
     = link_to "パスワードを変更する", "#", class: "btn btn-primary"
-  .col-xs-6
+  .col-6
 
 br
 .row
-  .col-xs-1
+  .col-1
 
-  .col-xs-6
+  .col-6
     table.table.table-bordered
       tbody
         tr
-          td.active.col-xs-4
+          td.active.col-4
             | 氏名
-          td.col-xs-8
+          td.col-8
             = @my_data.last_name
             = @my_data.first_name
         tr
@@ -53,22 +53,22 @@ br
             | メールアドレス
           td
             = @my_data.email
-  .col-xs-5
+  .col-5
 
 .row
-  .col-xs-1
+  .col-1
 
-  .col-xs-1
-    label[style="line-height: 34px;"]
+  .col-1
+    label
       | 配送先
-  .col-xs-10
+  .col-10
     = link_to "一覧を見る", addresses_path, class: "btn btn-primary"
 br
 .row
-  .col-xs-1
+  .col-1
 
-  .col-xs-1
+  .col-1
     label[style="line-height: 34px;"]
       | 注文履歴
-  .col-xs-10
+  .col-10
     = link_to "一覧を見る", "#", class: "btn btn-primary"
