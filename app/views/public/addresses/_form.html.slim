@@ -1,0 +1,18 @@
+= form_with(model: address) do |f|
+  .field
+    label
+      | 郵便番号(ハイフンなし)
+    = f.text_field :postal_code
+
+  .field
+    label
+      | 住所
+    = f.text_field :destination
+
+  .field
+    label
+      | 宛名
+    = f.text_field :consignee
+
+  .action
+      = f.submit "登録する" , class: "btn btn-success"
