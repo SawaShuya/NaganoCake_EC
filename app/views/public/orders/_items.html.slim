@@ -1,0 +1,56 @@
+- if cart_items.blank?
+  p
+    | カートに商品が登録されておりません
+
+- else
+  - sum = 0
+  table.table.table-bordered
+    thead
+      tr
+        th
+          | 商品名
+        th
+          | 単価(税込)
+        th
+          | 数量
+        th
+          | 小計
+    tbody
+      = f.fields_for :ordered_details do |od|
+        - cart_items.each do |cart_item|
+          tr
+            td
+              = attachment_image_tag cart_item.item, :item_image, size: "40x40", fallback: "no_image.jpg"
+              = cart_item.item.name
+              = od.hidden_field :item_id, :value => cart_item.item.id
+            td
+              = cart_item.item.taxed
+              = od.hidden_field :non_taxed_price, :value => cart_item.item.non_taxed_price
+            td
+              = cart_item.amount
+              = od.hidden_field :amount, :value => cart_item.amount
+            td
+              = cart_item.subtotal
+              - sum += cart_item.subtotal
+
+
+  table.table.table-bordered
+    tr
+      td
+        | 合計金額
+      td
+        = sum
+    tr
+      td
+        | 送料
+      td
+        - postage = Order.new.postage
+        = postage
+    tr
+      th
+        | 請求金額
+      td
+        - total_payment = sum + postage
+        = total_payment
+        = f.hidden_field :total_payment, :value => total_payment
+

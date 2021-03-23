@@ -52,7 +52,7 @@ class Public::CartItemsController < ApplicationController
 
 
 	def set_cart_items
-		@cart_items = CartItem.where(end_user_id: current_end_user.id)
+		@cart_items = current_end_user.cart_items.includes(:item)
 	end
 
 	def set_cart_item

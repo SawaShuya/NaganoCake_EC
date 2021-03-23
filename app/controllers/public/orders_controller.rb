@@ -1,63 +1,25 @@
 class Public::OrdersController < ApplicationController
+	before_action :check_and_set_cart_items, only: [:new, :confirm]
 	def new
 		@order = Order.new
-		@addresses = Address.all
-		@cart_items = CartItem.where(end_user_id: current_end_user.id)
-		if @cart_items.blank?
-			redirect_to cart_items_path
-		end
+		@addresses = current_end_user.addresses
 	end
 
 	def confirm
-		@cart_items = CartItem.where(end_user_id: current_end_user.id)
 		@order = Order.new(order_params)
-		# 送料は固定で800
-		@order.postage = 800
-		@total_payment = 0
-
-		# addres_optionによって宛名、郵便番号、住所を指定
-		if params[:order][:address_option] == "0"
-			@order.consignee = current_end_user.last_name + current_end_user.first_name
-			@order.postal_code = current_end_user.postal_code
-			@order.destination_address = current_end_user.address
-
-		elsif params[:order][:address_option] == "1"
-			address = Address.find(params[:order][:id])
-			@order.consignee = address.consignee
-			@order.postal_code = address.postal_code
-			@order.destination_address = address.destination
-		elsif params[:order][:address_option] == "2"
-		end
-
-
-
+		@cart_items = @cart_items.includes(:item)
+		@order.set_address(current_end_user, params[:order][:address_option].to_i, params[:order][:address_id].to_i)
+		@order.order_details.build
 	end
 
-	def finish
-	end
+	def finish; end
 
 	def create
-		@order = Order.new(order_params)
-		@order.end_user_id = current_end_user.id
+		@order = current_end_user.orders.new(order_params)
 
-		cart_items = CartItem.where(end_user_id: current_end_user.id)
-		# ordersテーブルを保存して、保存ができたらorder_detailsテーブルを保存
 		if @order.save
-			# カートから商品id、個数を取得して、金額はitemsテーブルから取得
-			cart_items.each do |cart_item|
-				order_detail = OrderDetail.new
-				order_detail.order_id = @order.id
-				order_detail.item_id = cart_item.item_id
-				order_detail.amount = cart_item.amount
-				order_detail.non_taxed_price = Item.find(cart_item.item_id).non_taxed_price
-				if order_detail.save
-					flash[:notice] = "create oreder & detail successfully"
-				else
-					flash[:notice] = "create only oreder successfully"
-				end
-			end
-			# カートの中の商品を削除
-			cart_items.destroy_all
+			current_end_user.cart_items.delete_all
+			flash[:notice] = "create oreder successfully"
 			redirect_to order_finish_path
 		else
 			flash[:notice] = "cannnot create oreder"
@@ -65,17 +27,21 @@ class Public::OrdersController < ApplicationController
 		end
 	end
 
-	def index
-	end
+	def index; end
 
-	def show
-	end
-
+	def show; end
 
 
 	private
 	def order_params
-		params.require(:order).permit(:end_user_id, :payment_method, :total_payment, :postal_code, :destination_address, :consignee, :address_option, :postage)
+		params.require(:order).permit(:end_user_id, :payment_method, :total_payment, :postal_code, :destination_address, :consignee, :postage, [order_details_attributes: [:order_id, :item_id, :amount, :non_taxed_price]])
+	end
+
+	def check_and_set_cart_items
+		@cart_items = current_end_user.cart_items
+		if @cart_items.blank?
+			redirect_to cart_items_path
+		end
 	end
 
 end

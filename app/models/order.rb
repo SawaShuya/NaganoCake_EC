@@ -13,4 +13,30 @@ class Order < ApplicationRecord
 	}
 	has_many :order_details
 	belongs_to :end_user
+
+	accepts_nested_attributes_for :order_details
+
+
+	def set_address(user, address_option, address_id)
+
+		if address_option == 0
+			self.consignee = user.last_name + user.first_name
+			self.postal_code = user.postal_code
+			self.destination_address = user.address
+
+		elsif address_option == 1
+			address = Address.find(address_id)
+			self.consignee = address.consignee
+			self.postal_code = address.postal_code
+			self.destination_address = address.destination
+		elsif address_option == 2
+		end
+	end
+	def postage
+		@postage = 800
+	end
+
+	def view_address
+		self.postal_code + '  ' + self.destination_address + '  ' + self.consignee
+	end
 end

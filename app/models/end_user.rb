@@ -21,5 +21,8 @@ class EndUser < ApplicationRecord
     super && (self.is_unsubscribe == false)
   end
 
+  def view_address
+		self.postal_code + "　" + self.address + "　" + self.last_name + "　" + self.first_name
+	end
 
 end

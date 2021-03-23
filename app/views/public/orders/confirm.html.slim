@@ -1,85 +1,22 @@
 h2
   | 注文確認画面
-.row
-  .col-xs-1
 
-  .col-xs-7
-    table.table.table-bordered[style="border-bottom: solid; border-width: 1px; border-color: #ddd;"]
-      thead
-        tr.active
-          th
-            | 商品名
-          th
-            | 単価(税込)
-          th
-            | 数量
-          th
-            | 小計
-      tbody
-        - sum = 0
-        - @cart_items.each do |cart_item|
-          tr
-            td.col-xs-4
-              = attachment_image_tag cart_item.item, :item_image, size: "40x40", fallback: "no_image.jpg"
-              = cart_item.item.name
-            td.col-xs-2
-              - cart_item_taxed_price = cart_item.item.non_taxed_price * 1.1
-              - cart_item_taxed_price = cart_item_taxed_price.floor(1).ceil
-              = cart_item_taxed_price
-            td.col-xs-2
-              = cart_item.amount
-            td.col-xs-2
-              - cart_item_subtotal = cart_item_taxed_price * cart_item.amount
-              - sum += cart_item_subtotal
-              = cart_item_subtotal
-  .col-xs-3
-    table.table.table-bordered
-      tbody
-        tr
-          td.active
-            | 送料
-          td
-            = @order.postage
-        tr
-          td.active
-            | 商品合計
-          td
-            = sum
-        td.active
-          | 請求金額
-        - @total_payment = sum + @order.postage
-        td
-          = @total_payment
-  .col-xs-1
+= form_with(model: @order, url: orders_path, local: true) do |f|
+  .cart_item
+    = render 'public/orders/items', cart_items: @cart_items, f: f
 
-.row
-  .col-xs-1
+  .order-info
+    .d-block
+      label
+        | 支払い方法
+      = @order.payment_method_i18n
+    .d-block
+      label
+        | お届け先
+      = @order.view_address
 
-  .col-xs-2
-    p
-      | 支払い方法
-  .col-xs-3
-    = @order.payment_method_i18n
-  .col-xs-6
-
-.row
-  .col-xs-1
-
-  .col-xs-2
-    p
-      | お届け先
-  .col-xs-3
-    = @order.postal_code + @order.destination_address
-    br
-    = @order.consignee
-  .col-xs-6
-
-.row
-  .col-xs-offset-5
-    = form_for(@order, url: orders_path) do |f|
-      = f.hidden_field :postage
-      = f.hidden_field :total_payment, :value => @total_payment
-      = f.hidden_field :consignee
-      = f.hidden_field :postal_code
-      = f.hidden_field :destination_address
-      = f.submit "購入を確定する",  "data-confirm" => "注文を確定してよろしいですか？", class: "btn btn-success"
+  = f.hidden_field :postage
+  = f.hidden_field :consignee
+  = f.hidden_field :postal_code
+  = f.hidden_field :destination_address
+  = f.submit "購入を確定する",  "data-confirm" => "注文を確定してよろしいですか？", class: "btn btn-success"
