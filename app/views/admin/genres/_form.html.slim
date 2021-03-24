@@ -1,0 +1,18 @@
+= form_with(model: genre, url: url, local: true) do |f|
+  .field
+    label
+      | ジャンル
+
+    = f.text_field :name
+
+  .field
+    lavel
+      = f.radio_button :is_active, :true
+      | 有効
+
+    lavel
+      = f.radio_button :is_active, :false
+      | 無効
+
+  .action
+    = f.submit genre.button_display, class: "btn btn-primary"

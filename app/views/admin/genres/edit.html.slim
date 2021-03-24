@@ -1,25 +1,6 @@
-.row
-  .col-xs-offset-2
-    h3
-      | ジャンル編集
-br
-= render "admin/admins/shared/error_messages", resource: @genre
-.row
-  = form_for(@genre, url: admin_genre_path) do |f|
-    .col-xs-1
+h3
+  | ジャンル編集
 
-    .col-xs-1
-      label
-        | ジャンル
-    .col-xs-2
-      = f.text_field :name
-    .col-xs-1
-      lavel
-        = f.radio_button :is_active, :true
-        | 有効
-    .col-xs-1
-      lavel
-        = f.radio_button :is_active, :false
-        | 無効
-    .col-xs-1
-      = f.submit "変更を保存する", class: "btn btn-primary"
+= render "admin/admins/shared/error_messages", resource: @genre
+.genre-form
+  = render 'admin/genres/form', genre: @genre, url: admin_genre_path

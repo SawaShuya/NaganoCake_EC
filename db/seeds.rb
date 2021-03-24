@@ -32,8 +32,9 @@ Genre.create(
 		is_active: true
 		}
 	]
-
 )
+connection = ActiveRecord::Base.connection();
+connection.execute("select setval('genres_id_seq',(select max(id) from genres))")
 
 Item.create(
 	[
