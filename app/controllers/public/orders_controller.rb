@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+	before_action :authenticate_end_user!
 	before_action :check_and_set_cart_items, only: [:new, :confirm]
 	def new
 		@order = Order.new

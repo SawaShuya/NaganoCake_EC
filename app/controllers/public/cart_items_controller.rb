@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+	before_action :authenticate_end_user!
 	before_action :set_cart_items, only: [:index, :destroy_all]
 	before_action :set_cart_item, only: [:update, :destroy]
 	before_action :check_amount, only: [:create, :update]

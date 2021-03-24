@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+	before_action :authenticate_admin!
 	before_action :set_item, only: [:new]
 	before_action :set_active_genres, only: [:new]
 	def index

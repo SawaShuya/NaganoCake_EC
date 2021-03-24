@@ -1,4 +1,5 @@
 class Public::ItemsController < ApplicationController
+	before_action :authenticate_end_user!, except: [:index]
 	before_action :set_genre
 
   def index

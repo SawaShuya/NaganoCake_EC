@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+	before_action :authenticate_end_user!
 	before_action :set_address, only: [:index, :edit]
 	before_action :set_addresses, only: [:index]
 	def index; end
