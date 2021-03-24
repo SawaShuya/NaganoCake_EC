@@ -10,14 +10,14 @@ class Item < ApplicationRecord
 
 	def self.search(search)
 		if search
-			@genre = Genre.find_by(['name LIKE ?', "%#{search}%"])
-			if @genre.present?
-				Item.where(['name LIKE ?', "%#{search}%"]).or(Item.where(genre_id: @genre.id))
+			genre_ids = Genre.where(['name LIKE ?', "%#{search}%"]).pluck(:id)
+			if genre_ids.present?
+				Item.where(['name LIKE ?', "%#{search}%"]).or(Item.where(genre_id: [genre_ids])).includes(:genre)
 			else
-				Item.where(['name LIKE ?', "%#{search}%"])
+				Item.where(['name LIKE ?', "%#{search}%"]).includes(:genre)
 			end
 		else
-			Item.all
+			Item.all.includes(:genre)
 		end
 	end
 

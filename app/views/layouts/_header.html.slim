@@ -6,6 +6,12 @@
     nav
       ul.nav.ml-auto
         li
+          = form_with url: admin_items_path, method: :get, local: true do |f|
+            .form-inline
+              = f.text_field :search, class: 'form-control'
+              = f.button :type => "submit", class: 'form-control' do
+                i.fas.fa-search
+        li
           = link_to "商品一覧", admin_items_path, class: "nav-link text-light"
         li
           = link_to "会員一覧", admin_end_users_path, class: "nav-link text-light"
