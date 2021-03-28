@@ -1,0 +1,52 @@
+- sum = 0
+table.table
+    tr
+      th
+        | 商品名
+      th
+        | 単価(税込)
+      th
+        | 個数
+      th
+        | 小計
+      th
+        | 製作ステータス
+      th
+    - order_details.each do |detail|
+      tr
+        = form_with(model: detail, url: admin_order_detail_path(detail.id), local: true) do |f|
+          td
+            = detail.item.name
+          td
+            = detail.taxed_price
+          td
+            = detail.amount
+          td
+            - subtotal = detail.amount * detail.taxed_price
+            - sum += subtotal
+            = subtotal
+          td
+            = f.select :production_status, OrderDetail.production_statuses.keys.map {|k| [I18n.t("enums.order_detail.production_status.#{k}"), k]}
+          td
+            = f.submit "更新", class: "btn btn-primary"
+
+table.table
+  tr
+    th
+      | 商品合計
+    td
+      = sum
+      | 円
+  tr
+    th
+      | 送料
+    td
+      = @order.postage
+      | 円
+  tr
+    th
+      | 請求金額合計
+    td
+      = @order.total_payment
+      | 円
+

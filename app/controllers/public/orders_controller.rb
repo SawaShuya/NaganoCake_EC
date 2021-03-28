@@ -16,9 +16,9 @@ class Public::OrdersController < ApplicationController
 	def finish; end
 
 	def create
-		@order = current_end_user.orders.new(order_params)
+		order = current_end_user.orders.build(order_params)
 
-		if @order.save
+		if order.save
 			current_end_user.cart_items.delete_all
 			flash[:notice] = "create oreder successfully"
 			redirect_to order_finish_path
@@ -35,7 +35,7 @@ class Public::OrdersController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:end_user_id, :payment_method, :total_payment, :postal_code, :destination_address, :consignee, :postage, [order_details_attributes: [:order_id, :item_id, :amount, :non_taxed_price]])
+		params.require(:order).permit(:end_user_id, :payment_method, :total_payment, :postal_code, :destination_address, :consignee, :postage, [order_details_attributes: [:order_id, :item_id, :amount, :taxed_price]])
 	end
 
 	def check_and_set_cart_items

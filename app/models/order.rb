@@ -37,6 +37,18 @@ class Order < ApplicationRecord
 	end
 
 	def view_address
-		self.postal_code + '  ' + self.destination_address + '  ' + self.consignee
+		"〒" + self.postal_code + '  ' + self.destination_address + '  ' + self.consignee
+	end
+
+	def all_change_status_to_waiting
+		self.order_details.each do |detail|
+			if detail.production_status == "unavailable"
+				detail.update(production_status: "waiting_for_production")
+			end
+		end
+	end
+
+	def finish_making?
+		self.order_details.where(production_status: ["unavailable", "waiting_for_production", "making"] ).blank?
 	end
 end

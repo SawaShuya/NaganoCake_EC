@@ -15,6 +15,7 @@ h2
         | お届け先
       = @order.view_address
 
+  = f.hidden_field :payment_method
   = f.hidden_field :postage
   = f.hidden_field :consignee
   = f.hidden_field :postal_code
